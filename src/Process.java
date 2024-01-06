@@ -57,13 +57,20 @@ class Process {
                 }
             } else {
                 if (dictionaries.get(s) != null) {
-                    absolouts.addAll(dictionaries.get(s));
+                    if (absolouts.size() == 0)
+                        absolouts.addAll(dictionaries.get(s));
+                    else absolouts.retainAll(dictionaries.get(s));
                 }
             }
 
         }
         if (absolouts.size() != 0 && atLeasts.size() != 0) {
+            result.addAll(absolouts);
             absolouts.retainAll(atLeasts);
+            for (String i : absolouts){
+                if(!result.contains(i))
+                    result.add(i);
+            }
         } else {
             result.addAll(absolouts);
             result.addAll(atLeasts);
